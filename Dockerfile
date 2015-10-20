@@ -1,4 +1,5 @@
-FROM ubuntu:latest
+#FROM ubuntu:latest
+FROM nordstrom/baseimage-ubuntu:14.04.2
 MAINTAINER George Jiglau <george@mux.ro>
 
 
