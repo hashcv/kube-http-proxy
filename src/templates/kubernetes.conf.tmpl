@@ -54,7 +54,7 @@ server {
         {{end}}
         {{end}}
 
-        proxy_pass http://{{$spec.cluserIP}}:{{or $server.targetPort 80}}{{if $server.targetPath}}/{{$server.targetPath}}/{{end}};
+        proxy_pass http://{{$spec.clusterIP}}:{{or $server.targetPort 80}}{{if $server.targetPath}}/{{$server.targetPath}}/{{end}};
     }
 
     {{range $serviceJSON := getvs "/registry/services/specs/*/*"}}
