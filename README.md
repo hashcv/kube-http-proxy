@@ -37,6 +37,7 @@ Examples
         "port": "8080",
         "targetPort": "3000",
         "default": true,
+        "pattern": true,
         "targetPath": "proxy",
         "pathOptions": ["proxy_pass_request_headers on"],
     },
@@ -61,6 +62,7 @@ Field:
   - path - Path on which this service is exposed. Defaults to "/".
   - webSocket - Enable if the service requires upgrading the HTTP conenction to a WebSocket. Defaults to false.
   - default - Enable if this is the default server. Defaults to false.
+  - pattern - Defaults to false, true adds a ~ to the location line allowing url rewriting.
   - targetPath - The path to proxy to.
   - options - Additional Nginx options for the server;
   - pathOptions - Additional Nginx options for the default path;
@@ -74,7 +76,8 @@ Field:
         {
             "path": "/somewhere/",
             "targetPort": "3000",
-            "webSocket": true
+            "webSocket": true,
+            "pattern": true
         },
         {
             "path": "/somewhere/else/",
@@ -98,6 +101,7 @@ Fields:
   - webSocket - Enable if the service requires upgrading the HTTP conenction to a WebSocket. Defaults to false.
   - targetPath - Path to proxy to.
   - options - Additional Nginx options for the path.
+  - pattern - Defaults to false, true adds a ~ to the location line allowing url rewriting.
 
 
 Example service.yaml
