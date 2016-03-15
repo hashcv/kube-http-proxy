@@ -106,11 +106,11 @@ Fields:
 
 Example service.yaml
 ```yaml
-apiVersion: v1beta3
+apiVersion: v1
 kind: List
 items:
   - kind: Service
-    apiVersion: v1beta3
+    apiVersion: v1
     metadata:
       name: test-proxy
       annotations:
@@ -122,7 +122,7 @@ items:
         - port: 80
           targetPort: http
   - kind: Service
-    apiVersion: v1beta3
+    apiVersion: v1
     metadata:
       name: test-proxy-api
       annotations:

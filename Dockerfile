@@ -1,5 +1,5 @@
 #FROM ubuntu:latest
-FROM nordstrom/baseimage-ubuntu:14.04.2
+FROM nordstrom/baseimage-ubuntu:latest
 MAINTAINER George Jiglau <george@mux.ro>
 
 
@@ -18,7 +18,7 @@ RUN add-apt-repository -y ppa:nginx/stable && \
 
 
 # Install confd
-ADD https://github.com/kelseyhightower/confd/releases/download/v0.9.0/confd-0.9.0-linux-amd64 /usr/local/bin/confd
+ADD https://github.com/kelseyhightower/confd/releases/download/v0.11.0/confd-0.11.0-linux-amd64 /usr/local/bin/confd
 RUN chmod u+x /usr/local/bin/confd && \
     mkdir -p /etc/confd/conf.d && \
     mkdir -p /etc/confd/templates
@@ -32,7 +32,7 @@ ADD ./src/confd-watch /opt/confd-watch
 RUN chmod +x /opt/confd-watch
 
 # Expose http and https ports
-EXPOSE 80 443
+EXPOSE 80 443 8003
 
 # Run the confd watcher by default
 CMD /opt/confd-watch
