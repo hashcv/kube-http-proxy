@@ -6,7 +6,7 @@ MAINTAINER George Jiglau <george@mux.ro>
 # Install add-apt-repository
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update -qy && \
-    apt-get install --no-install-recommends -qy software-properties-common
+    apt-get install --no-install-recommends -qy software-properties-common openssl
 
 
 # Install Nginx
@@ -16,9 +16,12 @@ RUN add-apt-repository -y ppa:nginx/stable && \
     chown -R www-data:www-data /var/lib/nginx && \
     rm -f /etc/nginx/sites-available/default
 
+RUN mkdir -p /etc/nginx/ssl/
+RUN openssl req -new -x509 -days 2000 -subj "/C=/ST=/L=/O=/CN=some.igov.org.ua" -nodes -out /etc/nginx/ssl/cert.crt -keyout /etc/nginx/ssl/cert.key
 
 # Install confd
-ADD https://github.com/kelseyhightower/confd/releases/download/v0.11.0/confd-0.11.0-linux-amd64 /usr/local/bin/confd
+ADD https://github.com/kelseyhightower/confd/releases/download/v0.12.0-alpha3/confd-0.12.0-alpha3-linux-amd64 /usr/local/bin/confd
+
 RUN chmod u+x /usr/local/bin/confd && \
     mkdir -p /etc/confd/conf.d && \
     mkdir -p /etc/confd/templates
@@ -32,7 +35,7 @@ ADD ./src/confd-watch /opt/confd-watch
 RUN chmod +x /opt/confd-watch
 
 # Expose http and https ports
-EXPOSE 80 443 8003
+EXPOSE 8443 18443
 
 # Run the confd watcher by default
 CMD /opt/confd-watch
