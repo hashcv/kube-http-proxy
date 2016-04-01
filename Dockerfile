@@ -17,7 +17,7 @@ RUN add-apt-repository -y ppa:nginx/stable && \
     rm -f /etc/nginx/sites-available/default
 
 RUN mkdir -p /etc/nginx/ssl/
-RUN openssl req -new -x509 -days 2000 -subj "/C=/ST=/L=/O=/CN=some.igov.org.ua" -nodes -out /etc/nginx/ssl/cert.crt -keyout /etc/nginx/ssl/cert.key
+RUN openssl req -new -x509 -days 2000 -subj "/C=/ST=/L=/O=/CN=examlpe.com" -nodes -out /etc/nginx/ssl/cert.crt -keyout /etc/nginx/ssl/cert.key
 
 # Install confd
 ADD https://github.com/kelseyhightower/confd/releases/download/v0.12.0-alpha3/confd-0.12.0-alpha3-linux-amd64 /usr/local/bin/confd
