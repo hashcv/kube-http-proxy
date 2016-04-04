@@ -29,7 +29,7 @@ RUN chmod u+x /usr/local/bin/confd && \
 # Add confd configuration files
 ADD ./src/conf.d/kubernetes-nginx.toml /etc/confd/conf.d/kubernetes-nginx.toml
 ADD ./src/templates/kubernetes.conf.tmpl /etc/confd/templates/kubernetes.conf.tmpl
-
+ADD ./src/nginx.conf /etc/nginx/nginx.conf
 # Add confd watcher
 ADD ./src/confd-watch /opt/confd-watch
 RUN chmod +x /opt/confd-watch
