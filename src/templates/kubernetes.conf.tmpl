@@ -10,13 +10,13 @@
 {{range $server := jsonArray $servers}}
 {{if $server.host}}
 # Generated config for {{$server.host}}
-#server {
-#    listen {{or $server.port 80}}{{if $server.default}} default_server{{end}};
-#    server_name {{$server.host}} {{if $server.names}}{{range $name := $server.names}}{{$name}}{{end}}{{end}};
+server {
+    listen {{or $server.port 80}}{{if $server.default}} default_server{{end}};
+    server_name {{$server.host}} {{if $server.names}}{{range $name := $server.names}}{{$name}}{{end}}{{end}};
 
     {{if $server.ssl}}
-#    return 301 https://$server_name$request_uri;
-#}
+    return 301 https://$server_name$request_uri;
+}
 server {
     listen {{or $server.sslPort 443}}{{if $server.default}} default_server{{end}} ssl;
     server_name {{$server.host}} {{if $server.names}}{{range $name := $server.names}}{{$name}}{{end}}{{end}};
@@ -55,7 +55,7 @@ server {
         {{end}}
         {{end}}
 
-        proxy_pass https://{{$spec.clusterIP}}:{{or $server.targetPort 80}}{{if $server.targetPath}}/{{$server.targetPath}}/{{end}};
+        proxy_pass {{or $server.targetSsl "http"}}://{{$spec.clusterIP}}:{{or $server.targetPort 80}}{{if $server.targetPath}}/{{$server.targetPath}}/{{end}};
     }
 
     {{range $serviceJSON := getvs "/registry/services/specs/*/*"}}
@@ -83,7 +83,7 @@ server {
         {{end}}
         {{end}}
 
-        proxy_pass https://{{$spec.clusterIP}}:{{or $path.targetPort 80}}{{if $path.targetPath}}/{{$path.targetPath}}/{{end}};
+        proxy_pass {{or $server.targetSsl "http"}}://{{$spec.clusterIP}}:{{or $path.targetPort 80}}{{if $path.targetPath}}/{{$path.targetPath}}/{{end}};
     }
     {{end}}
     {{end}}

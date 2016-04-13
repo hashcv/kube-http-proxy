@@ -7,7 +7,7 @@ After=docker.service
 
 [Service]
 ExecStartPre=-/usr/bin/docker rm -f kube-http-proxy
-ExecStart=/usr/bin/docker run -e CONFD_ETCD_NODE=http://<ip-address>:4001 -p 8443:8443 -p 18443:18443 --name kube-http-proxy -v /data/logs/nginx:/var/log/nginx kube-http-proxy
+ExecStart=/usr/bin/docker run -e CONFD_ETCD_NODE=http://<ip-address>:4001 -p 80:80 -p 443:443 --name kube-http-proxy -v /data/logs/nginx:/var/log/nginx kube-http-proxy
 ExecStop=/usr/bin/docker stop -t 2 kube-http-proxy ; /usr/bin/docker rm -f kube-http-proxy 
 Restart=always
 RestartSec=10

@@ -35,7 +35,7 @@ ADD ./src/confd-watch /opt/confd-watch
 RUN chmod +x /opt/confd-watch
 
 # Expose http and https ports
-EXPOSE 8443 18443
+EXPOSE 80 443
 
 # Run the confd watcher by default
 CMD /opt/confd-watch
