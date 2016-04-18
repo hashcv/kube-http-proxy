@@ -83,7 +83,7 @@ server {
         {{end}}
         {{end}}
 
-        proxy_pass {{or $server.targetSsl "http"}}://{{$spec.clusterIP}}:{{or $path.targetPort 80}}{{if $path.targetPath}}/{{$path.targetPath}}/{{end}};
+        proxy_pass {{or $path.targetSslPath "http"}}://{{$spec.clusterIP}}:{{or $path.targetPort 80}}{{if $path.targetPath}}/{{$path.targetPath}}/{{end}};
     }
     {{end}}
     {{end}}
