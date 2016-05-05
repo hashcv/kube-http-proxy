@@ -1,0 +1,14 @@
+- name: Docker| add docker repo
+  yum_repository:
+   gpgcheck=yes
+   gpgkey=https://yum.dockerproject.org/gpg
+   baseurl=https://yum.dockerproject.org/repo/main/centos/$releasever/
+   state=present
+   name=dockerrepo
+   description=Docker repository
+- name: Docker| yum update
+  yum: update_cache=yes
+- name: Docker| Installing
+  yum: 
+   name=docker-engine
+   state=latest
