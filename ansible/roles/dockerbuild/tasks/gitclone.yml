@@ -1,5 +1,9 @@
 ---
+- name: Git| mkdir for git clone
+  file: 
+   name={{ app_remote_dir }}
+   state=directory
 - name: Git| clone
   git:
    repo={{ git_repo }}
-   dest={{ app_local_dir }}
+   dest={{ app_remote_dir }}
