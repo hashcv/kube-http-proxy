@@ -1,4 +1,8 @@
 ---
+- name: Git| install
+  yum:
+   name=git
+   state=latest
 - name: Git| mkdir for git clone
   file: 
    name={{ app_remote_dir }}

@@ -1,3 +1,4 @@
+---
 - name: Docker| add docker repo
   yum_repository:
    gpgcheck=yes
