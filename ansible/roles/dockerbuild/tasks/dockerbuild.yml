@@ -1,1 +1,6 @@
-- name: Docker| 
+- name: Docker| Build from Dockerfile
+  docker_image:
+   path: "{{ dockerfile_path }}"
+   name: noonien/kube-http-proxy
+   state: build
+
