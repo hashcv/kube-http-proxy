@@ -16,3 +16,7 @@
 - name: Docker provisioning| installing docker-py
   pip:
    name: docker-py
+- name: Docker| start daemon
+  service:
+   name: docker
+   state: started

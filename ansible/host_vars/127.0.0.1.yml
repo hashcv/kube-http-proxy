@@ -2,4 +2,4 @@ ansible_ssh_user: root
 ansible_port: 22224
 git_repo: https://github.com/hashcv/kube-http-proxy
 app_remote_dir: /root/kube-http
-dockerfile_path: "{{ app_remote_dir }}/Dockerfile"
+dockerfile_path: "{{ app_remote_dir }}"
