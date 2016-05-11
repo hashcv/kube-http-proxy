@@ -1,0 +1,5 @@
+---
+- name: kube-http-proxy
+  hosts: all
+  roles:
+   - dockerbuild

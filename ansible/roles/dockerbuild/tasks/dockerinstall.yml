@@ -1,0 +1,22 @@
+---
+- name: Docker provisioning| add docker repo
+  yum_repository:
+   name: dockerrepo
+   description: Docker repository
+   baseurl: https://yum.dockerproject.org/repo/main/centos/$releasever/
+   gpgkey: https://yum.dockerproject.org/gpg
+   gpgcheck: yes
+- name: Docker| install python-pip
+  yum: name=epel-release state=latest
+- name: Docker provisioning| Installing docker-engine and pip
+  yum: name={{ item }} state=latest
+  with_items:
+    - docker-engine
+    - python-pip
+- name: Docker provisioning| installing docker-py
+  pip:
+   name: docker-py
+- name: Docker| start daemon
+  service:
+   name: docker
+   state: started

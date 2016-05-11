@@ -1,0 +1,3 @@
+#using localhost for tests. Change to real host in production
+[localhost_group]
+127.0.0.1

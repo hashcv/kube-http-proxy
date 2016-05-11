@@ -1,0 +1,5 @@
+- name: Docker| Build from Dockerfile
+  docker_image:
+   path: "{{ dockerfile_path }}"
+   name: "my/app"
+   state: present
