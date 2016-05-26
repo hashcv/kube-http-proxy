@@ -1,0 +1,13 @@
+---
+- name: Service | copy service unit
+  template: 
+   src: kube-http-proxy.service.j2
+   dest: /usr/lib/systemd/system/kube-http-proxy.service
+- name: Service | Enabling service
+  service:
+   name: kube-http-proxy
+   enabled: yes
+- name: Service | Starting service
+  service:
+   name: kube-http-proxy
+   state: started
