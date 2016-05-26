@@ -24,3 +24,4 @@
   service:
    name: docker
    state: started
+#Created by Punko <Punkoivan@yandex.ru> 10.02.16
