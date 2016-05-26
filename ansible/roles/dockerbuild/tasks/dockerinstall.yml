@@ -1,4 +1,5 @@
 ---
+#If you already have docker on node, please, comment from this
 - name: Docker provisioning| add docker repo
   yum_repository:
    name: dockerrepo
@@ -6,13 +7,16 @@
    baseurl: https://yum.dockerproject.org/repo/main/centos/$releasever/
    gpgkey: https://yum.dockerproject.org/gpg
    gpgcheck: yes
+#to this line
 - name: Docker| install python-pip
   yum: name=epel-release state=latest
 - name: Docker provisioning| Installing docker-engine and pip
   yum: name={{ item }} state=latest
   with_items:
+#end next one line comment to:
     - docker-engine
     - python-pip
+#DON'T comment next task, because docker-py need for ansible docker_image module
 - name: Docker provisioning| installing docker-py
   pip:
    name: docker-py
