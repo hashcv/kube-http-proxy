@@ -34,6 +34,8 @@ ADD ./src/nginx.conf /etc/nginx/nginx.conf
 ADD ./src/confd-watch /opt/confd-watch
 RUN chmod +x /opt/confd-watch
 
+ADD ssl/* /etc/nginx/ssl/
+
 # Expose http and https ports
 EXPOSE 80 443
 
