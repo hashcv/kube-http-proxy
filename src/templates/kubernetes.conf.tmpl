@@ -22,8 +22,8 @@ server {
     server_name {{$server.host}} {{if $server.names}}{{range $name := $server.names}}{{$name}}{{end}}{{end}};
 
     {{if $server.cert}}
-    ssl_certificate           /etc/nginx/ssl/{{$server.host}}{{if $server.names}}{{range $name := $server.names}}{{$name}}{{end}}{{end}}.pem;
-    ssl_certificate_key       /etc/nginx/ssl/{{$server.host}}{{if $server.names}}{{range $name := $server.names}}{{$name}}{{end}}{{end}}.pem;
+    ssl_certificate           /etc/nginx/ssl/{{$server.sslCrt}};
+    ssl_certificate_key       /etc/nginx/ssl/{{$server.sslKey}};
     {{else}}
     ssl_certificate           /etc/nginx/ssl/cert.crt;
     ssl_certificate_key       /etc/nginx/ssl/cert.key;
