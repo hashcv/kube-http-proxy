@@ -1,13 +1,15 @@
-#FROM ubuntu:latest
-FROM nordstrom/baseimage-ubuntu:latest
-MAINTAINER George Jiglau <george@mux.ro>
+FROM ubuntu:latest
 
-
-# Install add-apt-repository
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update -qy && \
-    apt-get install --no-install-recommends -qy software-properties-common openssl
 
+RUN apt-get update -qy \
+ && apt-get upgrade -qy \
+ && apt-get install -qy \
+      apt-transport-https \
+      apt-utils \
+      ca-certificates \
+      software-properties-common \
+      openssl
 
 # Install Nginx
 RUN add-apt-repository -y ppa:nginx/stable && \
@@ -17,7 +19,7 @@ RUN add-apt-repository -y ppa:nginx/stable && \
     rm -f /etc/nginx/sites-available/default
 
 RUN mkdir -p /etc/nginx/ssl/
-RUN openssl req -new -x509 -days 2000 -subj "/C=/ST=/L=/O=/CN=examlpe.com" -nodes -out /etc/nginx/ssl/cert.crt -keyout /etc/nginx/ssl/cert.key
+RUN openssl req -new -x509 -days 2000 -subj "/C=UA/ST=/L=/O=/CN=my.example.com" -nodes -out /etc/nginx/ssl/cert.crt -keyout /etc/nginx/ssl/cert.key
 
 # Install confd
 ADD https://github.com/kelseyhightower/confd/releases/download/v0.12.0-alpha3/confd-0.12.0-alpha3-linux-amd64 /usr/local/bin/confd
@@ -34,6 +36,7 @@ ADD ./src/nginx.conf /etc/nginx/nginx.conf
 ADD ./src/confd-watch /opt/confd-watch
 RUN chmod +x /opt/confd-watch
 
+# Add ssl certs
 ADD ssl/* /etc/nginx/ssl/
 
 # Expose http and https ports

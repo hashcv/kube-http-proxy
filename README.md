@@ -1,6 +1,5 @@
 kube-http-proxy
 ===============
-[![Docker Build Status](http://hubstatus.container42.com/noonien/kube-http-proxy)](https://registry.hub.docker.com/u/noonien/kube-http-proxy)
 [![License: MIT](http://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/noonien/kube-http-proxy/blob/master/LICENSE)
 
 This is a HTTP reverse proxy for [Kubernetes](https://github.com/GoogleCloudPlatform/kubernetes)
@@ -13,7 +12,7 @@ cluster on which Kubernetes operates.
 Usage
 -----
 
-    docker run -e CONFD_ETCD_NODE=<etcd-address>:<etcd-port> -p 80:80 -p 443:443 noonien/kube-http-proxy
+    docker run -e CONFD_ETCD_NODE=<etcd-address>:<etcd-port> -p 80:80 -p 443:443 kube-http-proxy
 
 The reverse proxy is configured using Kubernetes [annotations](https://github.com/GoogleCloudPlatform/kubernetes/blob/master/docs/annotations.md)
 on services.
