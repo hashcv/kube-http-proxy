@@ -39,6 +39,8 @@ RUN chmod +x /opt/confd-watch
 # Add ssl certs
 ADD ssl/* /etc/nginx/ssl/
 
+ADD .htpasswd* /etc/nginx/
+
 # Expose http and https ports
 EXPOSE 80 443
 

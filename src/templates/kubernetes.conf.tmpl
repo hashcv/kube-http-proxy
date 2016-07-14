@@ -20,7 +20,12 @@ server {
 server {
     listen {{or $server.sslPort 443}}{{if $server.default}} default_server{{end}} ssl;
     server_name {{$server.host}} {{if $server.names}}{{range $name := $server.names}}{{$name}}{{end}}{{end}};
-
+    
+    {{if $server.auth}}
+    auth_basic "Restricted Content";
+    auth_basic_user_file /etc/nginx/{{$server.auth}};
+    {{end}}
+    
     {{if $server.cert}}
     ssl_certificate           /etc/nginx/ssl/{{$server.sslCrt}};
     ssl_certificate_key       /etc/nginx/ssl/{{$server.sslKey}};
