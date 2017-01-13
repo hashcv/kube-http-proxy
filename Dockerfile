@@ -2,6 +2,9 @@ FROM ubuntu:latest
 
 ENV DEBIAN_FRONTEND noninteractive
 
+RUN echo "Europe/Kiev" > /etc/timezone && \
+ln -sf /usr/share/zoneinfo/Europe/Kiev /etc/localtime
+
 RUN apt-get update -qy \
  && apt-get upgrade -qy \
  && apt-get install -qy \
@@ -9,7 +12,12 @@ RUN apt-get update -qy \
       apt-utils \
       ca-certificates \
       software-properties-common \
-      openssl
+      openssl \
+      dnsutils \
+      vim \
+      curl \
+      net-tools \
+      tcpdump
 
 # Install Nginx
 RUN add-apt-repository -y ppa:nginx/stable && \
